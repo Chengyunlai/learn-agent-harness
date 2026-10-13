@@ -21,3 +21,11 @@
 新增公开reading_demo.py，消息/工具块及调用ID采用相同协议形状；模型固定响应、文件进程替换为直接10/0，异常真实捕获。浏览器重用此短代码，切换输入max_calls/truncated验证三分支。短代码省略正式程序其他校验与网络/进程处理，完整runtime保持原样。
 
 实际验证：公开短代码独立运行输出保存call_1和answered；verify_reading.py以CPython行前快照验证请求先保存才执行、工具反馈保存前后2/3条记录、错误ID对应、正常2次调用4条终态记录、上限1次调用3条记录、截断1次调用2条记录且没有执行函数。均通过。站点正式采集器也执行三变体，事件数量34/26/15，保存前的result与少量变量可见。阶段代码、导航和CI修改同次提交 `Add browser teaching loop and trace verification`，父提交07d7f4b375e334d0f42de807f006dd8133138195。完整SDK和真实进程入口保持独立，在线模型未调用。
+
+## 2026-10-13：原样函数的浏览器教学绑定
+
+用户要求代码块的debug单步直接带动SVG，并形成可复用方案，替代图与独立短代码各自推进。新增figure_fixtures.py/fixture_context：八组输入包括模型请求1组、工具成功/失败/超时/拒绝4组、循环正常/上限/截断3组。setup准备SDK/进程替身，entry调用原样正式函数，watch/scopes为站点真实采集器提供观察范围。loop需要的两个adapter从core函数inspect.getsource提取，未另写或改造循环。API和进程边界被替代，函数本身实际执行，全部明确标注。站点将上下文生成展示绑定并复用原PythonDemo控制轨迹。
+
+实际验证：verify_fixtures.py执行core三个原样函数，八组输入的ID、错误标记、工具次数、两次/一次调用、4/3/2条记录和不执行路径全部通过；原9项进程测试、reading_demo验证与SDK模拟HTTP验证保留。站点正式trace_code对同组输入产生6/16/16/11/4/50/37/20事件，准备脚本/调用入口不进入源码行号，写回前后2/3条记录得到真实快照验证；普通运行与调试输出一致。没有访问在线模型，浏览器替身没有启动进程。公开Python源码runtime.py与旧版本一致。
+
+同步根README、context、examples/core导航与3.10/3.13 CI；父提交abfe22c77f2dd85219c77d591af9accfe21c7ee0，本轮提交 `Add explicit teaching bindings for source-driven figure debugging` 普通推送main。站点通用PythonFigure及collector改动独立提交，相关版本以发布结果核对。

@@ -9,4 +9,4 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 先读 [examples](../examples/README.md)，运行入口后读 [core 映射](../examples/s01-agent-loop/core/README.md)。设计、迁移来源和实际验证见 [第一课记录](implementation/s01-agent-loop.md)。后续课程在同一项目扩展，保持每课入口可运行，不提前增加权限、恢复、并发等生产架构。
 
 
-实践文章以8步常规路径、6步调用上限和3步截断路径解释实际运行时。`user_code/reading_demo.py` 为可浏览器执行的教学片段，`verify_reading.py`以独立CPython行前快照验证三路径与ID关联；固定响应替代模型、算式替代子进程，实际异常仍执行捕获。站点仅嵌入这个短代码的展示摘录，唯一公开原文件在本仓库；完整runtime未复制回站点。CI在3.10/3.13上增加短代码和快照验证。
+实践文章现在用三个完整函数的断点轨迹驱动SVG，代码与图宽屏同一行，站点复用PythonDemo/PythonFigure。user_code/figure_fixtures.py的fixture_context按函数与场景提供setup/entry/watch/scopes；SDK/进程替身明确标注，正式函数body保持原样，循环所需两个helper按inspect.getsource取自core，未另写循环。verify_fixtures.py验证八组输入，不访问API或真实文件进程；原verify_practice/SDK模拟HTTP继续验证实际入口。站点只生成源码摘录与教学绑定，不维护另一个Python实践实现。reading_demo/verify_reading保留作既有短代码实验，已不作为三个函数的替代展示。CI的3.10/3.13增加fixture验证。
