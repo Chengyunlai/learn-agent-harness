@@ -20,6 +20,8 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python examples/s01-agent-loop/user_code/practice.py
       - run: python examples/s01-agent-loop/user_code/verify_practice.py
+      - run: python examples/s01-agent-loop/user_code/reading_demo.py
+      - run: python examples/s01-agent-loop/user_code/verify_reading.py
   sdk-contract:
     runs-on: ubuntu-latest
     steps:

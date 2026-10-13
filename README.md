@@ -37,6 +37,7 @@ python3 examples/s01-agent-loop/user_code/practice.py
 
 ```bash
 python3 examples/s01-agent-loop/user_code/verify_practice.py
+python3 examples/s01-agent-loop/user_code/verify_reading.py
 ```
 
 可选 SDK 验证：安装固定版本后，以模拟 HTTP 验证真实 SDK 的报文转换，不访问模型服务。
@@ -46,6 +47,8 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python examples/s01-agent-loop/user_code/verify_sdk.py
 ```
+
+文章可不打开源码先跟图阅读，再展开断点实验。`user_code/reading_demo.py` 是浏览器短代码的公开原文件：固定模型响应保留停止原因、消息块和调用ID，直接求值替代文件进程；只验证教学机制。`verify_reading.py` 用真实行前快照检查保存前后、两次判断、调用上限和截断不执行。
 
 已验证 9 项标准库测试、真实 Python 进程、Anthropic Python SDK 1.13.0 的模拟 HTTP 请求/响应；尚未调用在线模型。GitHub Actions 分别运行 Python 3.10/3.13 的离线入口和测试，以及 Python 3.13 的 SDK 验证。
 

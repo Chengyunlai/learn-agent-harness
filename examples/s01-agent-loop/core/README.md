@@ -10,6 +10,7 @@
 | 保存完整请求、tool_use_id关联、有限调用与停止状态 | `run_loop` |
 | 离线/在线模式与工作目录 | `../user_code/practice.py`：`main`、`scripted_model` |
 | 真实进程与循环边界 | `../user_code/verify_practice.py`：`LoopChecks` |
+| 浏览器教学短代码与行前快照验证 | `../user_code/reading_demo.py`、`verify_reading.py` |
 | SDK + 模拟HTTP请求/响应 | `../user_code/verify_sdk.py`：`respond` |
 
 run_main为空参数自定义客户端工具，不是通用bash工具或隔离沙箱。完整有效assistant内容保存后再执行；结果以user/tool_result消息回传。正常回答、调用上限、API异常、响应截断和协议矛盾分别返回，进程错误作为工具反馈。
