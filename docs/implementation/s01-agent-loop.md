@@ -29,3 +29,9 @@
 实际验证：verify_fixtures.py执行core三个原样函数，八组输入的ID、错误标记、工具次数、两次/一次调用、4/3/2条记录和不执行路径全部通过；原9项进程测试、reading_demo验证与SDK模拟HTTP验证保留。站点正式trace_code对同组输入产生6/16/16/11/4/50/37/20事件，准备脚本/调用入口不进入源码行号，写回前后2/3条记录得到真实快照验证；普通运行与调试输出一致。没有访问在线模型，浏览器替身没有启动进程。公开Python源码runtime.py与旧版本一致。
 
 同步根README、context、examples/core导航与3.10/3.13 CI；父提交abfe22c77f2dd85219c77d591af9accfe21c7ee0，本轮提交 `Add explicit teaching bindings for source-driven figure debugging` 普通推送main。站点通用PythonFigure及collector改动独立提交，相关版本以发布结果核对。
+
+## 2026-10-14：同步配套小册名称
+
+经用户确认，配套小册展示名改为《Agent 与 Harness：思想与 Python 实践》。README链接名称与context同步，原书籍URL、项目名称、目录和代码不变；课程Learn Claude Code是参考来源，正式Python教学实现由本项目维护。
+
+实际验证：practice.py公开入口执行成功，真实除零程序反馈，2次固定响应后answered并报告运行失败；未调用在线API。纯文档同步，不重复SDK或轨迹测试。父提交539bb864ce54a04cceb074931ec19dc98548ba0f，README/context/本记录同次普通提交main并推送；沿用github.com已确认作者/提交者身份。

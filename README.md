@@ -1,6 +1,6 @@
 # Learn Agent Harness
 
-用 Python 逐课理解和编写 Agent Harness。配套小册：[Learn Claude Code 学习笔记](https://www.chengyunlai.top/zh/books/learn-claude-code)。
+用 Python 逐课理解和编写 Agent Harness。配套小册：[Agent 与 Harness：思想与 Python 实践](https://www.chengyunlai.top/zh/books/learn-claude-code)。
 
 每课围绕一个具体问题，只增加当前机制需要的实现。先运行 `user_code/`，再沿 `core/` 中的函数读代码。当前已提供第一课 Agent Loop，后续课程在同一仓库逐步扩展。
 
