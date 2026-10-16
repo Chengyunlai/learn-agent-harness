@@ -2,7 +2,7 @@
 
 用 Python 逐课理解和编写 Agent Harness。配套小册：[Agent 与 Harness：思想与 Python 实践](https://www.chengyunlai.top/zh/books/learn-claude-code)。
 
-每课围绕一个具体问题，只增加当前机制需要的实现。先运行 `user_code/`，再沿 `core/` 中的函数读代码。当前已提供第一课 Agent Loop，后续课程在同一仓库逐步扩展。
+每课围绕一个具体问题，只增加当前机制需要的实现。先运行 `user_code/`，再沿 `core/` 中的函数读代码。当前已提供第一课 Agent Loop 与第二课 Tool Use。
 
 ## 第一课：先运行一次
 
@@ -84,3 +84,13 @@ requirements.txt                # 可选 SDK 依赖
 本仓库是配套教学实现，参考 [Learn Claude Code](https://github.com/shareAI-lab/learn-claude-code) 的最小循环思想，并按本课范围增加停止控制；不代表 Claude Code 的完整运行时。
 
 License: [MIT](LICENSE)。
+
+## 第二课：工具分发
+
+```bash
+python3 examples/s02-tool-use/user_code/practice.py
+python3 examples/s02-tool-use/user_code/verify_practice.py
+python3 examples/s02-tool-use/user_code/verify_fixtures.py
+```
+
+先读main.py，再运行取得42，三次离线判断后回答；文件与进程真实执行。注册表同时保存说明、参数与实现，循环复用第一课。6组标准库测试与8组浏览器教学输入；可选SDK模拟HTTP验证入口verify_sdk.py。完整边界与文章链接见[第二课](examples/s02-tool-use/README.md)。

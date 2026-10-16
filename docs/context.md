@@ -12,3 +12,5 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 实践文章现在用三个完整函数的断点轨迹驱动SVG，代码与图宽屏同一行，站点复用PythonDemo/PythonFigure。user_code/figure_fixtures.py的fixture_context按函数与场景提供setup/entry/watch/scopes；SDK/进程替身明确标注，正式函数body保持原样，循环所需两个helper按inspect.getsource取自core，未另写循环。verify_fixtures.py验证八组输入，不访问API或真实文件进程；原verify_practice/SDK模拟HTTP继续验证实际入口。站点只生成源码摘录与教学绑定，不维护另一个Python实践实现。reading_demo/verify_reading保留作既有短代码实验，已不作为三个函数的替代展示。CI的3.10/3.13增加fixture验证。
 
 2026-10-14：配套小册展示名改为《Agent 与 Harness：思想与 Python 实践》，README链接名称同步，原URL/项目路径/运行时不变。Learn Claude Code为课程参考来源，Python实现由本项目独立维护。
+
+第二课Tool Use（2026-10-16）在examples/s02-tool-use：build_tools以同一注册派生模型定义与本地调用，execute_tool校验名称/字段/类型并保留调用ID，read_file约束解析目录与4096字节UTF-8。循环与进程按文件路径加载第一课唯一实现；run_loop仅新增question可选参数，旧默认不变。默认离线模型+真实文件/进程；浏览器3函数8输入使用公开文件/进程替身；verify_sdk为固定SDK模拟HTTP。索引、符号、测试和配套文章同步，记录见implementation/s02-tool-use.md。

@@ -46,11 +46,11 @@ def run_main(call, workspace: Path, timeout=3):
         return {**result, "content": f"无法启动：{error}", "is_error": True}
 
 
-def run_loop(ask, execute, max_calls=4, emit=print):
+def run_loop(ask, execute, max_calls=4, emit=print, question=QUESTION):
     """ask 读完整记录，execute 读工具请求；返回状态和证据，避免把停下当作成功。"""
     if max_calls < 1:
         raise ValueError("max_calls 必须至少为 1")
-    messages = [{"role": "user", "content": QUESTION}]
+    messages = [{"role": "user", "content": question}]
 
     def finish(status, text, calls):
         return {"status": status, "text": text, "calls": calls, "messages": messages}

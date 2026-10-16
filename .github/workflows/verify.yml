@@ -23,6 +23,9 @@ jobs:
       - run: python examples/s01-agent-loop/user_code/reading_demo.py
       - run: python examples/s01-agent-loop/user_code/verify_reading.py
       - run: python examples/s01-agent-loop/user_code/verify_fixtures.py
+      - run: python examples/s02-tool-use/user_code/practice.py
+      - run: python examples/s02-tool-use/user_code/verify_practice.py
+      - run: python examples/s02-tool-use/user_code/verify_fixtures.py
   sdk-contract:
     runs-on: ubuntu-latest
     steps:
@@ -32,3 +35,4 @@ jobs:
           python-version: '3.13'
       - run: python -m pip install -r requirements.txt
       - run: python examples/s01-agent-loop/user_code/verify_sdk.py
+      - run: python examples/s02-tool-use/user_code/verify_sdk.py
