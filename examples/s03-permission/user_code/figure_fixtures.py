@@ -44,11 +44,10 @@ def ask_user(shown, reason):
         if helper.__name__ != name:
             setup += "\n" + inspect.getsource(helper)
     if name == "permission_for":
-        entry = 'outcome = permission_for(call, tools, blocked)\nprint(outcome["decision"], outcome["reason"])'
+        entry = 'outcome = permission_for(call, tools, blocked)\nprint(outcome["decision"])'
     else:
         entry = f'''outcome = {name}(call, tools, ask_user, blocked)
-print(outcome)
-print("宿主询问", len(_approvals), "次；实际执行", _executions)'''
+print("实际执行：" + ("、".join(_executions) or "无"))'''
     return {"setup": setup, "entry": entry,
             "watch": ["call", "snapshot", "verdict", "answer", "outcome"], "scopes": [name]}
 
