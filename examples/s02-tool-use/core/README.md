@@ -11,3 +11,5 @@
 - run_loop：按文件路径加载第一课同一函数，保留消息/停止/顺序执行，只新增可配置问题参数。
 
 断点按符号：execute_tool中的output调用前观察已通过校验；read_file中的target.open前观察目录检查通过；未知工具/错误参数/越界路径均不能到达相应执行行。figure_fixtures为可查看的边界替身，不修改这些函数正文。
+
+第三课复用追加：validate_call提取既有名称/字段/类型检查，返回错误字符串或None，第二课execute_tool与第三课权限入口共用；第二课行为不变。浏览器fixture_context同步包含该helper，已发表站点摘录仍固定第二课历史提交。

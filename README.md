@@ -2,7 +2,7 @@
 
 用 Python 逐课理解和编写 Agent Harness。配套小册：[Agent 与 Harness：思想与 Python 实践](https://www.chengyunlai.top/zh/books/learn-claude-code)。
 
-每课围绕一个具体问题，只增加当前机制需要的实现。先运行 `user_code/`，再沿 `core/` 中的函数读代码。当前已提供第一课 Agent Loop 与第二课 Tool Use。
+每课围绕一个具体问题，只增加当前机制需要的实现。先运行 `user_code/`，再沿 `core/` 中的函数读代码。当前已提供第一课 Agent Loop、第二课 Tool Use 与第三课 Permission。
 
 ## 第一课：先运行一次
 
@@ -19,7 +19,7 @@ python3 examples/s01-agent-loop/user_code/practice.py
 ```text
 离线模式：模型响应为测试替身，main.py 真实执行
 模型调用 1
-执行工具 run_main
+处理工具请求 run_main
 工具结果：ZeroDivisionError: division by zero
 保存工具结果，供下一次调用读取
 模型调用 2
@@ -94,3 +94,13 @@ python3 examples/s02-tool-use/user_code/verify_fixtures.py
 ```
 
 先读main.py，再运行取得42，三次离线判断后回答；文件与进程真实执行。注册表同时保存说明、参数与实现，循环复用第一课。6组标准库测试与8组浏览器教学输入；可选SDK模拟HTTP验证入口verify_sdk.py。完整边界与文章链接见[第二课](examples/s02-tool-use/README.md)。
+
+## 第三课：执行之前取得权限
+
+```bash
+python3 examples/s03-permission/user_code/practice.py --decision deny
+python3 examples/s03-permission/user_code/practice.py --decision allow
+python3 examples/s03-permission/user_code/verify_practice.py
+```
+
+同一请求按宿主规则/回答决定是否执行；9组真实程序测试与13组浏览器输入，SDK模拟HTTP对照允许/拒绝。默认ask仅在交互终端询问，非交互拒绝。细节与文章见[第三课](examples/s03-permission/README.md)。

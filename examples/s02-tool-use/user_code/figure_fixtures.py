@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "core"))
-from runtime import build_tools, execute_tool, read_file
+from runtime import build_tools, execute_tool, read_file, validate_call
 
 CASES = {"build_tools": ["registry"], "execute_tool": ["read", "run", "unknown", "arguments"],
          "read_file": ["read", "outside", "large"]}
@@ -41,7 +41,7 @@ def _run_main(workspace):
     _runs.append("main.py")
     return "exit_code=0\\n42"
 '''
-    for helper in [read_file, build_tools]:
+    for helper in [read_file, build_tools, validate_call]:
         if name != helper.__name__:
             setup += "\n" + inspect.getsource(helper)
     if name == "build_tools":

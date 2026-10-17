@@ -59,20 +59,27 @@ def tool_definitions(tools):
     } for name, spec in tools.items()]
 
 
-def execute_tool(call, tools):
-    """循环已检查调用 ID；这里查名称、验参数、执行并封装关联结果。"""
-    result = {"type": "tool_result", "tool_use_id": call["id"]}
+def validate_call(call, tools):
+    """本课小型参数契约；供分发与后续权限入口共用。"""
     name, arguments = call.get("name"), call.get("input")
     if not isinstance(name, str) or name not in tools:
-        return {**result, "content": "未知工具。", "is_error": True}
-    spec = tools[name]
-    parameters = spec["parameters"]
+        return "未知工具。"
+    parameters = tools[name]["parameters"]
     if not isinstance(arguments, dict) or set(arguments) != set(parameters):
-        return {**result, "content": "参数字段不匹配。", "is_error": True}
+        return "参数字段不匹配。"
     if any(type(arguments[key]) is not kind for key, kind in parameters.items()):
-        return {**result, "content": "参数类型不匹配。", "is_error": True}
+        return "参数类型不匹配。"
+    return None
+
+
+def execute_tool(call, tools):
+    """校验与执行；每个返回值保留原调用 ID。"""
+    result = {"type": "tool_result", "tool_use_id": call["id"]}
+    error = validate_call(call, tools)
+    if error:
+        return {**result, "content": error, "is_error": True}
     try:
-        output = spec["run"](**arguments)
+        output = tools[call["name"]]["run"](**call["input"])
         return {**result, "content": output, "is_error": False}
     except (ValueError, OSError) as error:
         return {**result, "content": str(error), "is_error": True}

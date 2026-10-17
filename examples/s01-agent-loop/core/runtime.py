@@ -84,7 +84,7 @@ def run_loop(ask, execute, max_calls=4, emit=print, question=QUESTION):
         # 上面已经保存完整 assistant 响应；每个结果必须关联原调用 ID。
         results = []
         for call in calls:
-            emit(f"执行工具 {call.get('name')}")
+            emit(f"处理工具请求 {call.get('name')}")
             result = execute(call)
             results.append(result)
             emit("工具结果：" + result["content"].splitlines()[-1])
