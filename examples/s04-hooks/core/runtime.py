@@ -19,7 +19,7 @@ def run_hooks(hooks, event, payload):
     if event not in ("before", "after"):
         raise ValueError("未知 hook 事件")
     warnings = []
-    for callback in tuple(hooks.get(event, ())):
+    for index, callback in enumerate(tuple(hooks.get(event, ()))):
         try:
             reason = callback(deepcopy(payload))
             if reason is not None:
