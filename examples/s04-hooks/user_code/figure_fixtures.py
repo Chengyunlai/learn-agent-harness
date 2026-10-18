@@ -46,7 +46,7 @@ payload={{"call":call}}
     if name=='run_hooks':
         if scenario=='post_error':setup+='\nhooks["after"]=[first,second]\n'
         entry='outcome=run_hooks(hooks,event,payload)\nprint("回调顺序："+" → ".join(visited))'
-        watch=['event','reason','warnings','message','outcome']
+        watch=['event','reason','warnings','message','outcome','visited']
     elif name=='execute_hooked':
         if scenario=='post_error':setup+='\nhooks={"before":[second],"after":[first,second]}\n'
         entry='outcome=execute_hooked(call,tools,ask_user,hooks)\nprint("实际执行："+("、".join(_executions) or "无"))'
