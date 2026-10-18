@@ -104,3 +104,7 @@ python3 examples/s03-permission/user_code/verify_practice.py
 ```
 
 同一请求按宿主规则/回答决定是否执行；9组真实程序测试与13组浏览器输入，SDK模拟HTTP对照允许/拒绝。默认ask仅在交互终端询问，非交互拒绝。细节与文章见[第三课](examples/s03-permission/README.md)。
+
+## 第四课 Hooks
+
+[公开入口与说明](examples/s04-hooks/README.md)：在原权限入口前后增加同步检查与审计，故障按发生时机处理。`python3 examples/s04-hooks/user_code/practice.py --decision allow --audit-failure`可对照实际结果和宿主警告。

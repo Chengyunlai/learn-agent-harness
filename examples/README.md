@@ -10,3 +10,5 @@
 | [第三课：Permission](s03-permission/README.md) | `python3 examples/s03-permission/user_code/practice.py --decision deny` / `--decision allow` | 策略/宿主确认/执行快照；复用第二课和循环 | 9组真实执行测试、13输入、SDK模拟HTTP |
 
 第二课新增两项工具的注册、分发与路径读取，复用第一课循环。后续按实际实现追加，不发布空目录。
+
+第四课[Hooks](s04-hooks/README.md)：`python3 examples/s04-hooks/user_code/practice.py --decision allow`，增加--maintenance或--audit-failure观察阻止与警告；core三个函数，11测试/12绑定/SDK模拟HTTP。

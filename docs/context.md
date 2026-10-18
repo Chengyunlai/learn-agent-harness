@@ -16,3 +16,5 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 第二课Tool Use（2026-10-16）在examples/s02-tool-use：build_tools以同一注册派生模型定义与本地调用，execute_tool校验名称/字段/类型并保留调用ID，read_file约束解析目录与4096字节UTF-8。循环与进程按文件路径加载第一课唯一实现；run_loop仅新增question可选参数，旧默认不变。默认离线模型+真实文件/进程；浏览器3函数8输入使用公开文件/进程替身；verify_sdk为固定SDK模拟HTTP。索引、符号、测试和配套文章同步，记录见implementation/s02-tool-use.md。
 
 第三课Permission（2026-10-18）：s03-permission的permission_for只做策略判断，authorize_call在ask时获取宿主bool回答，execute_guarded以同一调用副本授权/执行。blocked优先、无策略拒绝、拒绝回传未执行结果；复用第二课提取的validate_call和分发/原循环。原日志改为“处理工具请求”，避免把进入权限判断误作进程执行。默认离线模型与真实读/获准后进程；13浏览器输入使用宿主/文件/进程替身。9组真实标记测试、两条SDK模拟HTTP路径；在线模型未调用。记录implementation/s03-permission.md。
+
+第四课Hooks（2026-10-18）：s04-hooks提供run_hooks/execute_hooked/audit_event；before顺序阻止、after警告继续，仍强制经过s03权限。审计记录在内存，warnings由装配层保留，原循环只收result。11真实程序测试、12教学输入、SDK模拟HTTP对照；无在线模型。记录implementation/s04-hooks.md。

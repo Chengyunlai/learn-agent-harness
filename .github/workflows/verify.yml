@@ -30,6 +30,9 @@ jobs:
       - run: python examples/s03-permission/user_code/practice.py --decision allow
       - run: python examples/s03-permission/user_code/verify_practice.py
       - run: python examples/s03-permission/user_code/verify_fixtures.py
+      - run: python examples/s04-hooks/user_code/practice.py --decision allow
+      - run: python examples/s04-hooks/user_code/verify_practice.py
+      - run: python examples/s04-hooks/user_code/verify_fixtures.py
   sdk-contract:
     runs-on: ubuntu-latest
     steps:
@@ -41,3 +44,4 @@ jobs:
       - run: python examples/s01-agent-loop/user_code/verify_sdk.py
       - run: python examples/s02-tool-use/user_code/verify_sdk.py
       - run: python examples/s03-permission/user_code/verify_sdk.py
+      - run: python examples/s04-hooks/user_code/verify_sdk.py
