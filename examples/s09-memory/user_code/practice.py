@@ -24,10 +24,10 @@ def child_model(messages, tools):
 def parent_model(messages, current_question=QUESTION):
     number = 1 if len(messages) == 1 else int(messages[-1]['content'][0]['tool_use_id'].split('_')[-1]) + 1
     question = messages[0]['content']
-    remembered = '报告使用中文，依次写是否执行、退出码、核对结论。' in question
+    remembered = '报告使用中文，先给核对结论，再列是否执行、退出码与证据。' in question
     if number > 1 and messages[-1]['content'][0]['is_error']:
         detail = messages[-1]['content'][0]['content']
-        return answer(('是否执行：否\n退出码：无\n核对结论：未执行，不能核对。\n' if remembered else '本次未继续：') + detail)
+        return answer(('核对结论：未执行，不能核对。\n是否执行：否\n退出码：无\n' if remembered else '本次未继续：') + detail)
     if number == 1: return use('load_skill', {'name': 'output-check'}, 1)
     if number == 2: return use('task', {'task': '只读检查main.py与expected.txt，不运行。'}, 2)
     if number == 3: return use('read_file', {'path': 'expected.txt'}, 3)
@@ -42,7 +42,7 @@ def parent_model(messages, current_question=QUESTION):
     if '本次用一句话' in current_question:
         return answer('已执行，' + exit_line + '，' + verdict)
     if remembered:
-        return answer('是否执行：是\n退出码：' + exit_line.removeprefix('exit_code=') + '\n核对结论：' + verdict + '\n实际输出：' + output)
+        return answer('核对结论：' + verdict + '\n是否执行：是\n退出码：' + exit_line.removeprefix('exit_code=') + '\n实际输出：' + output)
     return answer('实际结果：\n' + actual + '\n' + verdict)
 
 

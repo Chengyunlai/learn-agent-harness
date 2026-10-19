@@ -22,7 +22,7 @@ from types import SimpleNamespace
 scenario=SCENARIO
 _temp=tempfile.TemporaryDirectory(prefix="lesson9-")
 directory=Path(_temp.name)
-report={"name":"report-format","description":"程序报告偏好","keywords":["核对","报告"],"body":"报告使用中文，依次写是否执行、退出码、核对结论。","source":"用户明确要求，宿主审核"}
+report={"name":"report-format","description":"程序报告偏好","keywords":["核对","报告"],"body":"报告使用中文，先给核对结论，再列是否执行、退出码与证据。","source":"用户明确要求，宿主审核"}
 sql={**report,"name":"sql-style","description":"SQL书写偏好","keywords":["SQL"],"body":"SQL关键字使用大写。"}
 initial=[] if scenario=="new" else [report,sql]
 (directory/"memory.json").write_text(json.dumps({"version":1,"records":initial},ensure_ascii=False),encoding="utf-8")
