@@ -74,6 +74,11 @@ class TodoChecks(unittest.TestCase):
             self.assertEqual(marker.exists(),executed)
             self.assertEqual(self.state['items'][-1]['status'],'completed' if executed else 'pending')
             self.assertEqual(outcome['status'],'answered');self.assertEqual(outcome['calls'],8)
+    def test_extra_output_is_not_equal_to_expected_last_line(self):
+        (self.root/'main.py').write_text("print('unexpected')\nprint(42)\n")
+        outcome=run_loop(lambda m:scripted_model(prepare_messages(m,self.state)),lambda c:execute_with_plan(c,self.tools,lambda *_:True,{})['result'],max_calls=12,emit=lambda _:None)
+        self.assertIn('与预期不一致',outcome['text'])
+
     def test_budget_keeps_incomplete_plan(self):
         outcome=run_loop(lambda m:scripted_model(prepare_messages(m,self.state)),lambda c:execute_with_plan(c,self.tools,lambda *_:True,{})['result'],max_calls=4,emit=lambda _:None)
         self.assertEqual(outcome['status'],'call_limit');self.assertFalse((self.root/'ran').exists())

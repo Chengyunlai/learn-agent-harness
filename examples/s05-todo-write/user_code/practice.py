@@ -42,7 +42,7 @@ def scripted_model(messages):
         results=[b for m in messages if m['role']=='user' and isinstance(m['content'],list) for b in m['content']]
         run=next(r for r in results if r['tool_use_id']=='step_6')
         expected=next(r for r in results if r['tool_use_id']=='step_4')['content'].strip()
-        text=run['content'] if run['is_error'] else run['content']+('\n与预期一致。' if run['content'].splitlines()[-1]==expected else '\n与预期不一致。')
+        text=run['content'] if run['is_error'] else run['content']+('\n与预期一致。' if run['content'].partition('\n')[2].strip()==expected else '\n与预期不一致。')
         return {'stop_reason':'end_turn','content':[{'type':'text','text':text}]}
     return {'stop_reason':'tool_use','content':[{'type':'tool_use','id':f'step_{index+1}','name':name,'input':arguments}]}
 
