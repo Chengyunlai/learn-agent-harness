@@ -120,3 +120,6 @@ python3 examples/s03-permission/user_code/verify_practice.py
 
 
 第八课[Context Compact](examples/s08-context-compact/README.md)：按完整交接分组，先保存压缩前快照，再移出旧工具正文，仍超预算才摘要旧前缀。原run_loop新增可选prepare候选提交入口，失败context_error保留旧历史；默认行为不变。
+
+
+第九课[Memory](examples/s09-memory/README.md)：`remember --approve`经宿主确认将稳定偏好保存到项目JSON；新`check`会话生成元数据目录、关键词选择、正文附请求副本。记忆不授予运行许可，当前文件证据与原循环保持独立。

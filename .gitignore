@@ -13,3 +13,7 @@ build/
 
 # Local lesson context snapshots
 examples/s08-context-compact/user_code/workspace/.context/
+
+# Local lesson project memory and compact snapshots
+examples/s09-memory/user_code/workspace/.memory/
+examples/s09-memory/user_code/workspace/.context/
