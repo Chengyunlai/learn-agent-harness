@@ -46,5 +46,5 @@ before=deepcopy(request)
  calls={'classify_failure':'classify_failure(outcome)','retry_delay':'retry_delay(attempt,retry_after,jitter)','request_with_recovery':'request_with_recovery(send,request,state,pause=waits.append,random_unit=lambda:0)'}
  entry='try:\n    observed='+calls[name]+'\n    print(observed)\nexcept (ValueError,RecoveryStopped) as error:\n    observed={"error":str(error)}\n    print(str(error))\n'
  if name=='request_with_recovery':entry+='assert request==before\nassert all(not x.get("content") for x in request["messages"] if x["role"]=="assistant")\n'
- watch={'classify_failure':['status','reason','observed'], 'retry_delay':['attempt','seconds','base','observed'], 'request_with_recovery':['attempt','decision','expanded','delay','state','observed']}[name]
+ watch={'classify_failure':['status','reason','observed'], 'retry_delay':['attempt','seconds','base','observed'], 'request_with_recovery':['attempt','decision','pending','delay','state','observed']}[name]
  return {'setup':setup,'entry':entry,'watch':watch,'scopes':[name]}
