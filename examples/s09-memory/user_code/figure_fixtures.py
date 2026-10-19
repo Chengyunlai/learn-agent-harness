@@ -53,6 +53,8 @@ before=deepcopy(messages)
 '''.replace('NAME', repr(name))
     call = {'save_memory': 'save_memory(directory,candidate,approved)', 'select_memories': 'select_memories(catalog,question,max_items=1 if scenario=="limit" else 2)', 'prepare_memory': 'prepare_memory(messages,records,selected,max_bytes=10 if scenario=="budget" else 4096)'}[name]
     entry = 'try:\n    observed=' + call + '\n    print("返回：",observed)\nexcept (ValueError,OSError) as error:\n    observed={"error":str(error)}\n    print(str(error))\nassert messages==before\n'
+    if name == 'prepare_memory':
+        entry = entry.replace('print("返回：",observed)', 'print("本次请求副本已准备；原历史保持不变。")')
     if name == 'save_memory':
         entry += 'stored=load_memory(directory)\nprint("当前保存：",[item["name"] for item in stored])\n'
         if case in ('unapproved', 'invalid', 'replace_error'):entry += 'assert (directory/"memory.json").read_bytes()==before_file\n'
