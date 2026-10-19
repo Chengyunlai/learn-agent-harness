@@ -24,10 +24,11 @@ actor,approve,feedback='lead',True,'仅批准本次计划，权限另行判断�
 if FUNCTION!='open_request':
     kind='shutdown' if scenario in ('busy','closed') else 'plan'
     sender,target=('lead','reader') if kind=='shutdown' else ('reader','lead')
+    if kind=='shutdown':payload,feedback='本次工作结束，请在空闲边界关闭。','空闲边界确认本次关闭。'
     request_id=open_request(state,team,directory,sender,target,kind,payload,lock)['request_id']
     actor=target
 if FUNCTION=='open_request':
-    if scenario=='shutdown':sender,target,kind='lead','reader','shutdown'
+    if scenario=='shutdown':sender,target,kind,payload='lead','reader','shutdown','本次工作结束，请在空闲边界关闭。'
     if scenario=='direction':sender,target='lead','reader'
     if scenario=='pending':open_request(state,team,directory,sender,target,kind,payload,lock)
     if scenario=='limit':
