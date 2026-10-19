@@ -45,3 +45,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第十三课[Background Tasks](../examples/s13-background-tasks/README.md)：固定main.py显式后台启动，收据/进程结果/文本通知分别交接；轮次边界非阻塞检查，模型先停时由宿主回收并展示未消费结果，无忙等模型调用。
+
+
+第十四课[Cron Scheduler](../examples/s14-cron-scheduler/README.md)：时间匹配、触发入队、空闲交付；固定UTC+08:00会话内表，执行权限独立，默认注入时钟，--serve-seconds才运行本进程调度线程。
