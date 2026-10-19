@@ -87,58 +87,58 @@ def ready_ids(board):
     return sorted(key for key,item in tasks.items() if item['status']=='pending' and all(tasks[d]['status']=='completed' for d in item['blocked_by']))
 
 
-def create_task(directory,task_id,subject,description,blocked_by):
+def create_task(directory, task_id, subject, description, blocked_by):
     """依赖只能引用已存在任务；新项从pending开始，不能覆盖旧ID。"""
-    task_id=identifier(task_id)
-    board=load_board(directory)
+    task_id = identifier(task_id)
+    board = load_board(directory)
     if task_id in board['tasks']:
         raise ValueError('任务ID已经存在，不覆盖。')
-    item={'id':task_id,'subject':subject,'description':description,'status':'pending',
-          'owner':None,'blocked_by':deepcopy(blocked_by),'result':''}
-    candidate=deepcopy(board)
-    candidate['tasks'][task_id]=item
-    candidate['revision']+=1
+    item = {'id': task_id, 'subject': subject, 'description': description, 'status': 'pending',
+            'owner': None, 'blocked_by': deepcopy(blocked_by), 'result': ''}
+    candidate = deepcopy(board)
+    candidate['tasks'][task_id] = item
+    candidate['revision'] += 1
     checked_board(candidate)
-    save_board(directory,candidate)
+    save_board(directory, candidate)
     return deepcopy(item)
 
 
-def claim_task(directory,task_id,owner):
+def claim_task(directory, task_id, owner):
     """重新读盘，检查状态与全部依赖，再写入负责人；单写者约定。"""
-    task_id,owner=identifier(task_id),identifier(owner)
-    board=load_board(directory)
+    task_id, owner = identifier(task_id), identifier(owner)
+    board = load_board(directory)
     if task_id not in board['tasks']:
         raise ValueError('未知任务。')
-    item=board['tasks'][task_id]
-    if item['status']!='pending':
+    item = board['tasks'][task_id]
+    if item['status'] != 'pending':
         raise ValueError('任务已被认领或完成，不能再次认领。')
-    blocked=[dep for dep in item['blocked_by'] if board['tasks'][dep]['status']!='completed']
+    blocked = [dep for dep in item['blocked_by'] if board['tasks'][dep]['status'] != 'completed']
     if blocked:
-        raise ValueError('依赖尚未完成：'+','.join(blocked))
-    candidate=deepcopy(board)
-    candidate['tasks'][task_id].update(status='in_progress',owner=owner)
-    candidate['revision']+=1
-    save_board(directory,candidate)
+        raise ValueError('依赖尚未完成：' + ','.join(blocked))
+    candidate = deepcopy(board)
+    candidate['tasks'][task_id].update(status='in_progress', owner=owner)
+    candidate['revision'] += 1
+    save_board(directory, candidate)
     return deepcopy(candidate['tasks'][task_id])
 
 
-def complete_task(directory,task_id,owner,result):
+def complete_task(directory, task_id, owner, result):
     """同一负责人提交结果说明；完成后重新求可开始项，不自动执行下游。"""
-    task_id,owner=identifier(task_id),identifier(owner)
-    board=load_board(directory)
+    task_id, owner = identifier(task_id), identifier(owner)
+    board = load_board(directory)
     if task_id not in board['tasks']:
         raise ValueError('未知任务。')
-    item=board['tasks'][task_id]
-    if item['status']!='in_progress' or item['owner']!=owner:
+    item = board['tasks'][task_id]
+    if item['status'] != 'in_progress' or item['owner'] != owner:
         raise ValueError('只有进行中任务的负责人可以提交完成。')
-    before=ready_ids(board)
-    candidate=deepcopy(board)
-    candidate['tasks'][task_id].update(status='completed',result=result)
-    candidate['revision']+=1
+    before = ready_ids(board)
+    candidate = deepcopy(board)
+    candidate['tasks'][task_id].update(status='completed', result=result)
+    candidate['revision'] += 1
     checked_board(candidate)
-    save_board(directory,candidate)
-    unlocked=[key for key in ready_ids(candidate) if key not in before]
-    return {'task':deepcopy(candidate['tasks'][task_id]),'unlocked':unlocked}
+    save_board(directory, candidate)
+    unlocked = [key for key in ready_ids(candidate) if key not in before]
+    return {'task': deepcopy(candidate['tasks'][task_id]), 'unlocked': unlocked}
 
 
 def build_task_tools(directory,owner):
