@@ -132,3 +132,6 @@ python3 examples/s03-permission/user_code/verify_practice.py
 
 
 第十二课[Task System](examples/s12-task-system/README.md)：单写者持久任务图，依赖检查/宿主认领/完成与解锁，跨进程恢复进度；任务状态不代替执行证据。公开入口init/show/work，设计与验证见docs/implementation/s12-task-system.md。
+
+
+第十三课[Background Tasks](examples/s13-background-tasks/README.md)：固定main.py显式后台启动，收据/进程结果/文本通知分别交接；轮次边界非阻塞检查，模型先停时由宿主回收并展示未消费结果，无忙等模型调用。
