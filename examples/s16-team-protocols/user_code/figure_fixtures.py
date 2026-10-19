@@ -6,7 +6,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'core'))
 import runtime as core
 FUNCTIONS=(core.open_request,core.reply_request,core.match_response)
 CASES={'open_request':['plan','shutdown','direction','pending','limit','save_error'],
-       'reply_request':['approve','reject','wrong_role','busy','duplicate','conflict','save_error'],
+       'reply_request':['approve','reject','wrong_role','busy','closed','duplicate','conflict','save_error'],
        'match_response':['approved','rejected','wrong_type','wrong_role','unknown','invalid','duplicate','forged']}
 
 
@@ -22,7 +22,7 @@ _temp=tempfile.TemporaryDirectory(prefix='s16-mail-');directory=Path(_temp.name)
 sender,target,kind,payload='reader','lead','plan','读取预期，再运行main.py。'
 actor,approve,feedback='lead',True,'仅批准本次计划，权限另行判断。'
 if FUNCTION!='open_request':
-    kind='shutdown' if scenario=='busy' else 'plan'
+    kind='shutdown' if scenario in ('busy','closed') else 'plan'
     sender,target=('lead','reader') if kind=='shutdown' else ('reader','lead')
     request_id=open_request(state,team,directory,sender,target,kind,payload,lock)['request_id']
     actor=target

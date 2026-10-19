@@ -10,6 +10,7 @@ for name,cases in CASES.items():
         if name=='reply_request':
             if case=='busy':assert result['status']=='deferred' and env['state']==env['before'] and env['team']['reader']['active']
             if case in ('approve','reject'):assert env['state'][env['request_id']]['status']=='pending'
+        if name=='reply_request' and case=='closed':assert env['team']['reader']['status']=='closed' and env['state'][env['request_id']]['status']=='pending'
         if name=='match_response':assert result['status']=={'approved':'approved','rejected':'rejected','duplicate':'duplicate'}.get(case,'ignored')
         count+=1
 print('PASS',count,'same-source teaching inputs')
