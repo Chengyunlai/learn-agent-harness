@@ -27,3 +27,6 @@
 
 
 第九课[Memory](s09-memory/README.md)：`remember --approve`经宿主确认将稳定偏好保存到项目JSON；新`check`会话生成元数据目录、关键词选择、正文附请求副本。记忆不授予运行许可，当前文件证据与原循环保持独立。
+
+
+第十课[System Prompt](s10-system-prompt/README.md)：从实际注册/目录收集快照，固定顺序分段组装，校验与预算通过才更新本地单项缓存；只读模式实际移除run_main。入口practice.py --read-only；本地复用仍会发模型请求，不是API提示缓存。
