@@ -49,5 +49,5 @@ if scenario=='replace_error':os.replace=broken_replace
 '''.replace('FUNCTION',repr(name))
  call={'create_task':"create_task(directory,task_id,'复查记录','只更新任务图，不执行程序。',deps)",'claim_task':'claim_task(directory,task_id,owner)','complete_task':'complete_task(directory,task_id,owner,result)'}[name]
  entry='try:\n    observed='+call+'\n    print(observed)\nexcept (ValueError,OSError) as error:\n    observed={"error":str(error)}\n    print(str(error))\n    assert (directory/"tasks.json").read_bytes()==before\nfinally:\n    os.replace=_replace\n'
- watch={'create_task':['item','board','candidate','observed'],'claim_task':['item','blocked','candidate','observed'],'complete_task':['before','candidate','unlocked','observed']}[name]
+ watch={'create_task':['item','board','candidate','observed'],'claim_task':['item','blocked','candidate','observed'],'complete_task':['task_id','item','before','candidate','unlocked','observed']}[name]
  return {'setup':setup,'entry':entry,'watch':watch,'scopes':[name]}
