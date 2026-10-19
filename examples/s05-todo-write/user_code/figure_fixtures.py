@@ -41,7 +41,7 @@ except ValueError as error:
         entry='''try:
     outcome=write_todos(state,items)
 except ValueError as error:
-    outcome=str(error)
+    outcome={"error":str(error)}
 print("当前清单：")
 print(format_todos(state["items"]))'''
         watch=['state','items','replacement','rendered','outcome']
