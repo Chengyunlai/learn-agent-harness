@@ -10,3 +10,6 @@ artifacts/
 *.egg-info/
 dist/
 build/
+
+# Local lesson context snapshots
+examples/s08-context-compact/user_code/workspace/.context/

@@ -15,3 +15,5 @@
 | SDK + 模拟HTTP请求/响应 | `../user_code/verify_sdk.py`：`respond` |
 
 run_main为空参数自定义客户端工具，不是通用bash工具或隔离沙箱。完整有效assistant内容保存后再执行；结果以user/tool_result消息回传。正常回答、调用上限、API异常、响应截断和协议矛盾分别返回，进程错误作为工具反馈。
+
+第八课新增run_loop(...,prepare=None)：可选请求前候选处理，深副本运行、成功才提交；失败context_error，calls仍只计已发送父请求。默认None不改变第一课行为。

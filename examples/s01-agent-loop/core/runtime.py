@@ -1,4 +1,5 @@
 """第一课实践：一个客户端工具、内存记录、有限次模型调用。"""
+from copy import deepcopy
 import subprocess
 import sys
 from pathlib import Path
@@ -46,7 +47,7 @@ def run_main(call, workspace: Path, timeout=3):
         return {**result, "content": f"无法启动：{error}", "is_error": True}
 
 
-def run_loop(ask, execute, max_calls=4, emit=print, question=QUESTION):
+def run_loop(ask, execute, max_calls=4, emit=print, question=QUESTION, prepare=None):
     """ask 读完整记录，execute 读工具请求；返回状态和证据，避免把停下当作成功。"""
     if max_calls < 1:
         raise ValueError("max_calls 必须至少为 1")
@@ -56,6 +57,15 @@ def run_loop(ask, execute, max_calls=4, emit=print, question=QUESTION):
         return {"status": status, "text": text, "calls": calls, "messages": messages}
 
     for number in range(1, max_calls + 1):
+        if prepare is not None:
+            try:
+                candidate = prepare(deepcopy(messages))
+                if type(candidate) is not list:
+                    raise ValueError("prepare必须返回候选消息列表")
+            except Exception as error:
+                detail = str(error)[:160] if isinstance(error, ValueError) else type(error).__name__
+                return finish("context_error", f"上下文准备失败：{detail}；原历史保留。", number - 1)
+            messages[:] = candidate
         emit(f"模型调用 {number}")
         try:
             response = ask(messages)

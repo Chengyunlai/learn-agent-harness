@@ -27,3 +27,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第七课[Skills](../examples/s07-skills/README.md)：启动读取技能头部，system只带目录，load_skill按注册名称读取完整有界正文。入口`python3 examples/s07-skills/user_code/practice.py --decision deny`，保留前课清单/Hook/权限/子任务，正文不授予权限。
+
+
+第八课[Context Compact](../examples/s08-context-compact/README.md)：按完整交接分组，先保存压缩前快照，再移出旧工具正文，仍超预算才摘要旧前缀。原run_loop新增可选prepare候选提交入口，失败context_error保留旧历史；默认行为不变。
