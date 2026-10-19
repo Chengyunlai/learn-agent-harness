@@ -18,3 +18,6 @@
 
 
 第六课[Subagent](s06-subagent/README.md)：独立消息、只读工具、同步有界子循环；父循环只接收状态和短结论。入口`python3 examples/s06-subagent/user_code/practice.py --decision deny`，设计与验证见`docs/implementation/s06-subagent.md`。
+
+
+第七课[Skills](s07-skills/README.md)：启动读取技能头部，system只带目录，load_skill按注册名称读取完整有界正文。入口`python3 examples/s07-skills/user_code/practice.py --decision deny`，保留前课清单/Hook/权限/子任务，正文不授予权限。
