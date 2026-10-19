@@ -51,3 +51,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第十五课[Agent Teams](../examples/s15-agent-teams/README.md)：独立成员上下文与追加式JSONL收件箱，reader接收reviewer信息后沿用原调查，queued和模型已读分开；12测试/18输入/SDK模拟HTTP。
+
+
+第十六课[Team Protocols](../examples/s16-team-protocols/README.md)：类型化计划与关闭协议，保存/匹配分开；ID、角色、重复决定与空闲确认，协作门控与宿主执行许可独立。10测试/21输入/SDK三路径各8模拟HTTP。
