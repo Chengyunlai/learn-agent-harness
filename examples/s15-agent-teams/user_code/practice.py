@@ -28,7 +28,9 @@ def fixed_model(messages, actor):
         if number == 0:
             return use('read_file', {'path': 'main.py' if actor == 'reader' else 'expected.txt'}, actor, phase, 1)
         if number == 1:
-            data = messages[-1]['content'][0]
+            data = next(block for message in messages[anchor + 1:] if isinstance(message['content'], list)
+                        for block in message['content'] if block.get('type') == 'tool_result'
+                        and block.get('tool_use_id') == f'{actor}-{phase}-1')
             if data['is_error']:return _s10.answer('读取失败，不能提供文件结论。')
             return use('send_message', {'recipient': 'lead' if actor == 'reader' else 'reader',
                        'body': ('源码记录：' if actor == 'reader' else '预期记录：') + data['content']}, actor, phase, 2)

@@ -6,7 +6,7 @@ import tempfile
 import threading
 import unittest
 from unittest.mock import patch
-from practice import demo
+from practice import demo, fixed_model
 from runtime import create_team, send_message, prepare_inbox, run_teammate, load_inbox, message_tool, _s07
 
 class TeamTests(unittest.TestCase):
@@ -28,6 +28,14 @@ class TeamTests(unittest.TestCase):
                 notices=[m['content'] for m in req['messages'] if isinstance(m['content'],str) and m['content'].startswith('[team-message] ')]
                 self.assertEqual(len(notices),len(set(notices)))
             self.assertTrue(all(not m['active'] for m in team.values()))
+    def test_notice_after_result_does_not_replace_tool_evidence(self):
+        history=[{'role':'user','content':'[team-turn] reader:1\n读取源码'},
+                 {'role':'assistant','content':[{'type':'tool_use','id':'reader-1-1','name':'read_file','input':{'path':'main.py'}}]},
+                 {'role':'user','content':[{'type':'tool_result','tool_use_id':'reader-1-1','content':'print(6*7)','is_error':False}]},
+                 {'role':'user','content':'[team-message] '+json.dumps({'sender':'reviewer','body':'预期42'})}]
+        response=fixed_model(history,'reader')
+        self.assertEqual(response['content'][0]['name'],'send_message')
+        self.assertIn('print(6*7)',response['content'][0]['input']['body'])
     def test_concurrent_senders(self):
         with tempfile.TemporaryDirectory() as d:
             team,lock=create_team(),threading.RLock()
