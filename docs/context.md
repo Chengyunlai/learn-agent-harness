@@ -39,3 +39,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第十一课[Error Recovery](../examples/s11-error-recovery/README.md)：只包装父模型请求，分类/退避/有界恢复，完整响应才交回原循环；已有工具结果保留，截断请求不执行。每轮4次、父会话20次尝试/3秒计划等待，源码与证据见docs/implementation/s11-error-recovery.md。
+
+
+第十二课[Task System](../examples/s12-task-system/README.md)：单写者持久任务图，依赖检查/宿主认领/完成与解锁，跨进程恢复进度；任务状态不代替执行证据。公开入口init/show/work，设计与验证见docs/implementation/s12-task-system.md。

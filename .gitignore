@@ -21,3 +21,6 @@ examples/s09-memory/user_code/workspace/.context/
 examples/s10-system-prompt/user_code/workspace/.context/
 
 examples/s11-error-recovery/user_code/workspace/.context/
+
+examples/s12-task-system/user_code/workspace/.tasks/
+examples/s12-task-system/user_code/workspace/.context/
