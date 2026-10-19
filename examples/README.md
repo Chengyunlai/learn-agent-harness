@@ -42,3 +42,6 @@
 
 
 第十四课[Cron Scheduler](s14-cron-scheduler/README.md)：时间匹配、触发入队、空闲交付；固定UTC+08:00会话内表，执行权限独立，默认注入时钟，--serve-seconds才运行本进程调度线程。
+
+
+第十五课[Agent Teams](s15-agent-teams/README.md)：独立成员上下文与追加式JSONL收件箱，reader接收reviewer信息后沿用原调查，queued和模型已读分开；12测试/18输入/SDK模拟HTTP。
