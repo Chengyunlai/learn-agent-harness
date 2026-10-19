@@ -16,7 +16,7 @@ python3 examples/s06-subagent/user_code/verify_fixtures.py
 
 第五课清单仍可用，按请求副本附加；默认脚本聚焦子任务，不重复四次清单更新。父task和子read均经过Hook/权限入口；子Hook是独立的本地审计回调，不自动继承父宿主自定义策略。实际项目应显式传递必要策略，不能把本例当作完整授权继承方案。文件读取仍受第二课目录与字节限制。上下文隔离不等于文件系统沙箱；若未来给子任务写工具，副作用会落在相同工作目录。
 
-`figure_fixtures.py`公开浏览器绑定：完整函数正文执行，但run_subagent中的原循环、模型和文件入口为简短内存替身，便于逐行观察边界；真实嵌套循环由verify_practice验证。child_tools/task_result纯内存，无外部调用。站点图复用PythonFigure唯一断点，不另设阶段游标。
+`figure_fixtures.py`公开浏览器绑定：完整函数正文执行，run_subagent复用同源原循环，仅模型和文件入口为内存替身，便于逐行观察边界；真实嵌套循环由verify_practice验证。child_tools/task_result纯内存，无外部调用。站点图复用PythonFigure唯一断点，不另设阶段游标。
 
 可选安装requirements.txt后运行verify_sdk.py；固定Anthropic1.13.0和httpx2.MockTransport，允许/拒绝各7次模拟HTTP，检查父子system/tools/历史及关联ID。`--live`需显式ANTHROPIC_API_KEY与ANTHROPIC_MODEL，访问真实模型；本课交付未调用在线模型。
 
