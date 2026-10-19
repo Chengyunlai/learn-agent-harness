@@ -40,6 +40,6 @@ if scenario=="empty" and "registry" in globals():registry={}
     entry='try:\n    observed='+call+'\n    print("读取目录："+", ".join(observed) if isinstance(observed,dict) else observed)\nexcept (ValueError,OSError,UnicodeError) as error:\n    observed={"error":str(error)}\n    print(str(error))'
     if scenario=='repeat':entry+='\nassert observed==build_system(registry,base)\nprint("再次生成相同，没有叠加目录。")'
     watch={'scan_skills':['registry','name','meta','observed'],
-           'build_system':['lines','name','description','catalog','observed'],
-           'load_skill':['name','entry','raw','text','observed']}[name]
+           'build_system':['lines','name','description','catalog','observed','registry'],
+           'load_skill':['name','entry','raw','text','observed','registry']}[name]
     return {'setup':setup,'entry':entry,'watch':watch,'scopes':[name]}
