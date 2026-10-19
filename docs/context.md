@@ -20,4 +20,4 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 第四课Hooks（2026-10-18）：s04-hooks提供run_hooks/execute_hooked/audit_event；before顺序阻止、after警告继续，仍强制经过s03权限。审计记录在内存，warnings由装配层保留，原循环只收result。11真实程序测试、12教学输入、SDK模拟HTTP对照；无在线模型。记录implementation/s04-hooks.md。
 
 
-第五课TodoWrite（2026-10-19）：s05-todo-write新增validate_todos/write_todos/prepare_messages；整份有界清单原子替换，请求副本附当前计划不改历史。s04注入guard保持默认权限，s05仅显式放行内存计划工具且保留blocked/hooks。10测试、11内存绑定、SDK两路径各8模拟HTTP，无在线模型。见implementation/s05-todo-write.md。
+第五课TodoWrite（2026-10-19）：s05-todo-write新增validate_todos/write_todos/prepare_messages；整份有界清单原子替换，请求副本附当前计划不改历史。s04注入guard保持默认权限，s05仅显式放行内存计划工具且保留blocked/hooks。11测试、11内存绑定、SDK两路径各8模拟HTTP，无在线模型。见implementation/s05-todo-write.md。

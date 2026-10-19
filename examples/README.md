@@ -14,4 +14,4 @@
 第四课[Hooks](s04-hooks/README.md)：`python3 examples/s04-hooks/user_code/practice.py --decision allow`，增加--maintenance或--audit-failure观察阻止与警告；core三个函数，11测试/12绑定/SDK模拟HTTP。
 
 
-第五课[TodoWrite](s05-todo-write/README.md)：实践入口--decision allow/deny，--maintenance或--max-calls 4触发边界。三个计划函数、10测试/11教学输入/SDK模拟HTTP。
+第五课[TodoWrite](s05-todo-write/README.md)：实践入口--decision allow/deny，--maintenance或--max-calls 4触发边界。三个计划函数、11测试/11教学输入/SDK模拟HTTP。
