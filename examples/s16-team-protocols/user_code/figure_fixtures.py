@@ -60,6 +60,6 @@ if scenario=='save_error':os.replace=broken_replace
           'match_response':'match_response(state, message, recipient, lock)'}[name]
     entry='try:\n    observed='+call+'\nexcept (ValueError,OSError) as error:\n    observed={"error":str(error)}\nfinally:\n    os.replace=_replace\nprint(observed)\n'
     watch={'open_request':['kind','request_id','request','receipt','state','observed'],
-           'reply_request':['actor','request_id','record','response','team','observed'],
+           'reply_request':['actor','record','response','state','team','observed'],
            'match_response':['recipient','data','record','state','observed']}[name]
     return {'setup':setup,'entry':entry,'watch':watch,'scopes':[name]}
