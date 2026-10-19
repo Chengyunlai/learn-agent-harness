@@ -108,3 +108,6 @@ python3 examples/s03-permission/user_code/verify_practice.py
 ## 第四课 Hooks
 
 [公开入口与说明](examples/s04-hooks/README.md)：在原权限入口前后增加同步检查与审计，故障按发生时机处理。`python3 examples/s04-hooks/user_code/practice.py --decision allow --audit-failure`可对照实际结果和宿主警告。
+
+
+第五课[TodoWrite](examples/s05-todo-write/README.md)：`python3 examples/s05-todo-write/user_code/practice.py --decision allow`。内存计划原子替换，每轮读取当前清单，状态与真实执行分开验证。

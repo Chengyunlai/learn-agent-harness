@@ -34,7 +34,7 @@ def run_hooks(hooks, event, payload):
     return {"blocked": None, "warnings": warnings}
 
 
-def execute_hooked(call, tools, ask_user, hooks, blocked=()):
+def execute_hooked(call, tools, ask_user, hooks, blocked=(), guard=None):
     """包住上一课权限入口；后置观察故障不覆盖实际结果，也不重试工具。"""
     snapshot = deepcopy(call)
     before = run_hooks(hooks, "before", {"call": snapshot})
@@ -42,7 +42,7 @@ def execute_hooked(call, tools, ask_user, hooks, blocked=()):
         result = {"type": "tool_result", "tool_use_id": snapshot["id"],
                   "content": "未执行：" + before["blocked"], "is_error": True}
     else:
-        result = execute_guarded(snapshot, tools, ask_user, blocked)
+        result = (guard or execute_guarded)(snapshot, tools, ask_user, blocked)
     after = run_hooks(hooks, "after", {"call": snapshot, "result": result})
     return {"result": result, "warnings": after["warnings"]}
 

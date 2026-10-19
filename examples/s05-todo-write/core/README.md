@@ -1,0 +1,3 @@
+# 正式符号
+
+runtime.py唯一实现。validate_todos返回新规范列表，不改state；write_todos先完整校验/渲染，再一次写state.items；prepare_messages复制原历史、保留原问题并附当前计划。format_todos负责稳定短文本格式。build_tools/工具schema新增todo_write，execute_with_plan在s04可注入guard处定义本地清单权限，再复用s03授权和s02分发。run_loop仍为s01实现。user_code/practice.py只装配宿主/离线响应和hooks，figure_fixtures按inspect读取原函数。

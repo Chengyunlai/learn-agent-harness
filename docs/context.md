@@ -18,3 +18,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 第三课Permission（2026-10-18）：s03-permission的permission_for只做策略判断，authorize_call在ask时获取宿主bool回答，execute_guarded以同一调用副本授权/执行。blocked优先、无策略拒绝、拒绝回传未执行结果；复用第二课提取的validate_call和分发/原循环。原日志改为“处理工具请求”，避免把进入权限判断误作进程执行。默认离线模型与真实读/获准后进程；13浏览器输入使用宿主/文件/进程替身。9组真实标记测试、两条SDK模拟HTTP路径；在线模型未调用。记录implementation/s03-permission.md。
 
 第四课Hooks（2026-10-18）：s04-hooks提供run_hooks/execute_hooked/audit_event；before顺序阻止、after警告继续，仍强制经过s03权限。审计记录在内存，warnings由装配层保留，原循环只收result。11真实程序测试、12教学输入、SDK模拟HTTP对照；无在线模型。记录implementation/s04-hooks.md。
+
+
+第五课TodoWrite（2026-10-19）：s05-todo-write新增validate_todos/write_todos/prepare_messages；整份有界清单原子替换，请求副本附当前计划不改历史。s04注入guard保持默认权限，s05仅显式放行内存计划工具且保留blocked/hooks。10测试、11内存绑定、SDK两路径各8模拟HTTP，无在线模型。见implementation/s05-todo-write.md。
