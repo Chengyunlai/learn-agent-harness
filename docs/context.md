@@ -21,3 +21,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第五课TodoWrite（2026-10-19）：s05-todo-write新增validate_todos/write_todos/prepare_messages；整份有界清单原子替换，请求副本附当前计划不改历史。s04注入guard保持默认权限，s05仅显式放行内存计划工具且保留blocked/hooks。11测试、11内存绑定、SDK两路径各8模拟HTTP，无在线模型。见implementation/s05-todo-write.md。
+
+
+第六课[Subagent](../examples/s06-subagent/README.md)：独立消息、只读工具、同步有界子循环；父循环只接收状态和短结论。入口`python3 examples/s06-subagent/user_code/practice.py --decision deny`，设计与验证见`docs/implementation/s06-subagent.md`。

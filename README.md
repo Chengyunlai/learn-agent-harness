@@ -111,3 +111,6 @@ python3 examples/s03-permission/user_code/verify_practice.py
 
 
 第五课[TodoWrite](examples/s05-todo-write/README.md)：`python3 examples/s05-todo-write/user_code/practice.py --decision allow`。内存计划原子替换，每轮读取当前清单，状态与真实执行分开验证。
+
+
+第六课[Subagent](examples/s06-subagent/README.md)：独立消息、只读工具、同步有界子循环；父循环只接收状态和短结论。入口`python3 examples/s06-subagent/user_code/practice.py --decision deny`，设计与验证见`docs/implementation/s06-subagent.md`。

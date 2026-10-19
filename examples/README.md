@@ -15,3 +15,6 @@
 
 
 第五课[TodoWrite](s05-todo-write/README.md)：实践入口--decision allow/deny，--maintenance或--max-calls 4触发边界。三个计划函数、11测试/11教学输入/SDK模拟HTTP。
+
+
+第六课[Subagent](s06-subagent/README.md)：独立消息、只读工具、同步有界子循环；父循环只接收状态和短结论。入口`python3 examples/s06-subagent/user_code/practice.py --decision deny`，设计与验证见`docs/implementation/s06-subagent.md`。
