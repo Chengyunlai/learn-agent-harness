@@ -4,7 +4,13 @@ from pathlib import Path
 import os
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'core'))
-from runtime import QUESTION, _s09, _s08, _s07, run_loop, collect_context, get_system_prompt
+import importlib.util
+_core_path = Path(__file__).resolve().parents[1] / 'core/runtime.py'
+_core_spec = importlib.util.spec_from_file_location('s10_core', _core_path)
+_core = importlib.util.module_from_spec(_core_spec)
+_core_spec.loader.exec_module(_core)
+QUESTION, _s09, _s08, _s07 = _core.QUESTION, _core._s09, _core._s08, _core._s07
+run_loop, collect_context, get_system_prompt = _core.run_loop, _core.collect_context, _core.get_system_prompt
 
 
 def use(name, arguments, number):

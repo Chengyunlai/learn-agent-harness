@@ -36,3 +36,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第十课[System Prompt](../examples/s10-system-prompt/README.md)：从实际注册/目录收集快照，固定顺序分段组装，校验与预算通过才更新本地单项缓存；只读模式实际移除run_main。入口practice.py --read-only；本地复用仍会发模型请求，不是API提示缓存。
+
+
+第十一课[Error Recovery](../examples/s11-error-recovery/README.md)：只包装父模型请求，分类/退避/有界恢复，完整响应才交回原循环；已有工具结果保留，截断请求不执行。每轮4次、父会话20次尝试/3秒计划等待，源码与证据见docs/implementation/s11-error-recovery.md。

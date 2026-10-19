@@ -46,6 +46,9 @@ jobs:
       - run: python examples/s09-memory/user_code/verify_fixtures.py
       - run: python examples/s10-system-prompt/user_code/verify_practice.py
       - run: python examples/s10-system-prompt/user_code/verify_fixtures.py
+      - run: python examples/s11-error-recovery/user_code/practice.py --decision allow
+      - run: python examples/s11-error-recovery/user_code/verify_practice.py
+      - run: python examples/s11-error-recovery/user_code/verify_fixtures.py
   sdk-contract:
     runs-on: ubuntu-latest
     steps:
@@ -64,3 +67,4 @@ jobs:
       - run: python examples/s08-context-compact/user_code/verify_sdk.py
       - run: python examples/s09-memory/user_code/verify_sdk.py
       - run: python examples/s10-system-prompt/user_code/verify_sdk.py
+      - run: python examples/s11-error-recovery/user_code/verify_sdk.py

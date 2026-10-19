@@ -19,3 +19,5 @@ examples/s09-memory/user_code/workspace/.memory/
 examples/s09-memory/user_code/workspace/.context/
 
 examples/s10-system-prompt/user_code/workspace/.context/
+
+examples/s11-error-recovery/user_code/workspace/.context/
