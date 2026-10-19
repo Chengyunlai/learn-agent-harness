@@ -58,7 +58,7 @@ before=deepcopy(messages)
     if name == 'save_memory':
         entry += 'stored=load_memory(directory)\nprint("当前保存：",[item["name"] for item in stored])\n'
         if case in ('unapproved', 'invalid', 'replace_error'):entry += 'assert (directory/"memory.json").read_bytes()==before_file\n'
-    watch = {'save_memory': ['item', 'records', 'replacement', 'payload', 'observed'],
-             'select_memories': ['entries', 'query', 'selected', 'item', 'matched', 'observed'],
-             'prepare_memory': ['selected', 'registry', 'notes', 'attachment', 'prepared', 'observed']}[name]
+    watch = {'save_memory': ['item', 'records', 'replacement', 'observed'],
+             'select_memories': ['query', 'selected', 'item', 'matched', 'observed'],
+             'prepare_memory': ['selected', 'notes', 'prepared', 'observed']}[name]
     return {'setup': setup, 'entry': entry, 'watch': watch, 'scopes': [name]}
