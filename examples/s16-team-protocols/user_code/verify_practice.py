@@ -24,6 +24,10 @@ class ProtocolTests(unittest.TestCase):
             if marker.exists():self.assertEqual(marker.read_text(),'x');self.assertIn('42',result['work']['text'])
             self.assertEqual(result['pending_before'],'pending');self.assertEqual(result['shutdown_before'],'pending');self.assertEqual(result['team']['reader']['status'],'closed');self.assertEqual(result['blocked']['status'],'unavailable')
             self.assertEqual(len(result['traces']),7);self.assertIn('reader-plan-1',str(result['team']['reader']['history']))
+    def test_actual_output_mismatch_is_not_success_claim(self):
+        work=self.root/'mismatch';work.mkdir();(work/'expected.txt').write_text('43');(work/'main.py').write_text('print(42)')
+        result=demo(self.mail,work,True,True)
+        self.assertIn('与预期不符',result['work']['text'])
     def test_save_failure_keeps_request_and_member(self):
         import runtime
         with patch.object(runtime._s15.os,'replace',side_effect=OSError('disk')):

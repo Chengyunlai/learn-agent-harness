@@ -71,7 +71,17 @@ def fixed_model(messages, actor, phase, approve):
             for b in m["content"]
             if b.get("type") == "tool_result"
         ]
-        return _s10.answer("本次工具反馈：" + results[-1]["content"])
+        expected, executed = results[0], results[-1]
+        if not expected["is_error"] and not executed["is_error"]:
+            matches = (
+                executed["content"].strip() == "exit_code=0\n" + expected["content"].strip()
+            )
+            return _s10.answer(
+                "本次工具反馈："
+                + executed["content"]
+                + ("；与预期一致。" if matches else "；与预期不符。")
+            )
+        return _s10.answer("本次工具反馈：" + executed["content"])
     return _s10.answer("本轮协议消息已保存；请求方匹配后才推进状态。")
 
 
