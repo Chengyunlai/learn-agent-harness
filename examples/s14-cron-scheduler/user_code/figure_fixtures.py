@@ -45,7 +45,7 @@ busy=scenario=='busy'
     call={'cron_matches':'cron_matches(expression, when)', 'enqueue_due':'enqueue_due(state, when, lock)',
           'dispatch_next':'dispatch_next(state, run_turn, lock, busy)'}[name]
     entry='try:\n    observed='+call+'\nexcept ValueError as error:\n    observed={"error":str(error)}\nprint(observed)\n'
-    watch={'cron_matches':['parts','local','day_ok','week_ok','observed'],
-           'enqueue_due':['slot','job_id','job','event','added','observed'],
-           'dispatch_next':['busy','event','response','outcome','received','observed']}[name]
+    watch={'cron_matches':['expression','parts','day_ok','week_ok','observed'],
+           'enqueue_due':['state','slot','job','event','added','observed'],
+           'dispatch_next':['state','busy','event','response','outcome','observed']}[name]
     return {'setup':setup,'entry':entry,'watch':watch,'scopes':[name]}
