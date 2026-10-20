@@ -54,3 +54,6 @@ Python3.10+，默认入口/verify_practice 仅标准库。requirements.txt 固�
 
 
 第十六课[Team Protocols](../examples/s16-team-protocols/README.md)：类型化计划与关闭协议，保存/匹配分开；ID、角色、重复决定与空闲确认，协作门控与宿主执行许可独立。11测试/22输入/SDK三路径各8模拟HTTP。
+
+
+第十七课[Autonomous Agents](../examples/s17-autonomous-agents/README.md)：空闲查板、自主认领与锁内重检，依赖解锁后再取任务，关闭优先/锁外等待/有界停止；13测试、22输入、SDK三路径各8模拟HTTP。
