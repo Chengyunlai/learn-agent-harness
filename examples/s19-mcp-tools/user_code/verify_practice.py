@@ -55,6 +55,25 @@ class BridgeTests(unittest.TestCase):
     def test_errors_never_retry_remote_call(self):
         for case in ('tool_error','transport','mixed','oversize'):
             state=env('call_external',case);out=core.call_external(state['call'],state['pool'],state['ask_user']);self.assertTrue(out['is_error']);self.assertEqual(len(state['remote_calls']),1)
+    def test_new_tool_waits_for_next_model_request(self):
+        import tempfile
+        from pathlib import Path
+        from practice import run_example
+        state=env('call_external','success')
+        class Bridge:
+            list_page=staticmethod(lambda cursor:{'tools':[state['a']]})
+            call=staticmethod(state['invoke'])
+        requests=[]
+        def send(req):
+            requests.append(req)
+            if len(requests)==1:
+                return {'stop_reason':'tool_use','content':[{'type':'tool_use','id':'load-1','name':'load_docs_tools','input':{}},{'type':'tool_use','id':'premature-2','name':'mcp__docs__search_docs','input':{'query':'q'}}]}
+            return {'stop_reason':'end_turn','content':[{'type':'text','text':'已收到未开放工具的拒绝。'}]}
+        with tempfile.TemporaryDirectory() as d:result=run_example(Path(d),Bridge(),True,send)
+        self.assertEqual(state['remote_calls'],[])
+        self.assertNotIn('mcp__docs__search_docs',[t['name'] for t in requests[0]['tools']])
+        self.assertIn('mcp__docs__search_docs',[t['name'] for t in requests[1]['tools']])
+        self.assertTrue(result['outcome']['messages'][2]['content'][1]['is_error'])
     def test_result_subset_and_error_flag(self):
         for reply in ({'content':[]},{'content':[{'type':'text','text':''}]},{'content':[{'type':'text','text':'x'}],'isError':'false'},{'content':[{'type':'text','text':'x'}],'structuredContent':{'x':1}}):
             with self.assertRaises(ValueError):core.result_text(reply)

@@ -35,7 +35,7 @@ def fixed_model(messages):
 
 def run_example(root,bridge,allowed=False,send_override=None):
     builtins=_s07._s02.build_tools(root);builtins.pop('run_main')
-    pool={'current':None};cache={};requests=[];events=[]
+    pool={'current':None};active={'snapshot':None};cache={};requests=[];events=[]
     def load():
         discovered=discover_tools(bridge.list_page)
         candidate=assemble_tool_pool(_s07._s02.tool_definitions(builtins),{'docs':{'tools':discovered,'call':bridge.call}})
@@ -45,7 +45,7 @@ def run_example(root,bridge,allowed=False,send_override=None):
     pool['current']=assemble_tool_pool(_s07._s02.tool_definitions(builtins),{})
     recovery={'remaining':20,'waited':0.0,'events':[]}
     def ask(messages):
-        current=pool['current']
+        current=pool['current'];active['snapshot']=current
         # From one pool snapshot derive prompt inputs, SDK definitions and call routing.
         registered=dict(builtins)
         for spec in current['definitions']:
@@ -57,13 +57,13 @@ def run_example(root,bridge,allowed=False,send_override=None):
         requests.append(deepcopy(request));events.append({'names':[x['name'] for x in request['tools']],'reused':system['reused']})
         return _s11.request_with_recovery(send_override or (lambda req:fixed_model(req['messages'])),request,recovery,pause=lambda _:None,random_unit=lambda:0)
     def guard(call,tools,ask_user,blocked=()):
-        if call['name'] in pool['current']['routes']:return call_external(call,pool['current'],ask_user)
+        if call['name'] in active['snapshot']['routes']:return call_external(call,active['snapshot'],ask_user)
         if call['name']=='load_docs_tools':return _s07._s02.execute_tool(call,tools)
         return _s07._s04.execute_guarded(call,tools,ask_user,blocked)
     def execute(call):
         tools=dict(builtins)
-        for spec in pool['current']['definitions']:
-            if spec['name'] in pool['current']['routes']:
+        for spec in active['snapshot']['definitions']:
+            if spec['name'] in active['snapshot']['routes']:
                 tools[spec['name']]={'description':spec['description'],'parameters':{k:str for k in spec['input_schema']['properties']},'run':lambda **_:None}
         return _s07._s04.execute_hooked(call,tools,lambda *_:allowed,{},guard=guard)['result']
     outcome=run_loop(ask,execute,max_calls=4,emit=lambda _:None,question='查docs服务的运行许可规则，再读policy.txt，说明两者是否一致。')
