@@ -149,3 +149,5 @@ python3 examples/s03-permission/user_code/verify_practice.py
 第十七课[Autonomous Agents](examples/s17-autonomous-agents/README.md)：空闲查板、自主认领与锁内重检，依赖解锁后再取任务，关闭优先/锁外等待/有界停止；13测试、22输入、SDK三路径各8模拟HTTP。
 
 第十八课[Worktree Isolation](examples/s18-worktree-isolation/README.md)：两个队友各改自己的main.py；创建/owner绑定/保留清理三个函数，真实Git双线程、14测试/19教学输入，SDK两路径各7模拟HTTP；没有自动合并或沙箱。
+
+第十九课[MCP Tools](examples/s19-mcp-tools/README.md)：发现完整目录、统一模型定义与路由、宿主确认后调用；11标准库测试/21教学输入，官方MCP1.26.0真实stdio与2025-11-25协商，Anthropic模拟HTTP5/4次，无在线模型。
