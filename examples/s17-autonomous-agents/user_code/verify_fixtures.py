@@ -10,7 +10,7 @@ for name,cases in CASES.items():
   if name=='claim_next':
    if case=='save_error':assert 'error' in out
    else:assert out['status']=={'claimed':'claimed','stale':'claimed','busy':'busy','blocked':'idle'}.get(case,'unavailable')
-   if case=='stale':assert out['task']['id']=='source' and env['board']['tasks']['expected']['owner'] is None
+   if case=='stale':assert out['task']['id']=='source' and env['before']['tasks']['expected']['owner'] is None
   if name=='idle_poll':
    if case in ('bad_checks','shutdown_failure'):assert 'error' in out
    else:assert out['status']=={'task':'claimed','shutdown':'shutdown','timeout':'idle_timeout','wakeup':'claimed','busy':'unavailable','interrupted':'interrupted'}[case]

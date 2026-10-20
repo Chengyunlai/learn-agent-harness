@@ -59,6 +59,7 @@ if scenario in ('save_error','shutdown_failure'):os.replace=broken_replace
     call={'scan_ready':'scan_ready(board)','claim_next':'claim_next(directory, team, name, lock)',
           'idle_poll':'idle_poll(directory, team, state, mail, name, lock, wait, checks)'}[name]
     entry='try:\n    observed='+call+'\nexcept (ValueError,OSError) as error:\n    observed={"error":str(error)}\nfinally:\n    os.replace=_replace\nprint(observed)\n'
+    if name=='claim_next':entry+='board=load_board(directory)\n'
     watch={'scan_ready':['board','task_id','task','ready','observed'],
            'claim_next':['name','team','board','ready','task','observed'],
            'idle_poll':['name','team','index','control','outcome','observed']}[name]
