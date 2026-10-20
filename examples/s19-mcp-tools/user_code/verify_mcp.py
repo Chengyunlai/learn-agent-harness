@@ -37,6 +37,13 @@ async def main():
                 pool=core.assemble_tool_pool([],{'docs':{'tools':tools,'call':deadline}})
                 out=await asyncio.to_thread(core.call_external,{'id':'slow-1','name':'mcp__docs__search_docs','input':{'query':'slow'}},pool,lambda *_:True)
                 assert out['is_error'] and out['tool_use_id']=='slow-1'
+                # Timeout does not prove the server stopped: keep its transport alive,
+                # observe this fixture's eventual completion, then verify a live ping.
+                for _ in range(200):
+                    if 'tools/done' in journal.read_text():break
+                    await asyncio.sleep(.01)
+                else:raise AssertionError('owned slow fixture did not finish')
+                await session.send_ping()
         events=[json.loads(line) for line in journal.read_text().splitlines()]
         assert len([e for e in events if e['event']=='tools/call'])==1
         print('PASS real MCP deadline; one accepted call, error receipt, no retry')

@@ -25,6 +25,7 @@ async def call_tool(name, arguments):
     if mode == 'tool_error':
         return types.CallToolResult(content=[types.TextContent(type='text',text='文档索引暂不可用。')],isError=True)
     if arguments['query']=='slow':await asyncio.sleep(1)
+    log('tools/done',name=name)
     return [types.TextContent(type='text',text='运行main.py前需要本次明确许可；旧许可和目录隔离不能替代本次确认。')]
 
 async def main():
