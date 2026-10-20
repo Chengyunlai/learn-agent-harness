@@ -3,6 +3,7 @@ from copy import deepcopy
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 from practice import seed,run_example,LocalDocs
 from runtime import prepare_turn,run_session,dispatch_call,freeze_capabilities,_s19,_s07
 class Integration(unittest.TestCase):
@@ -51,6 +52,7 @@ class Integration(unittest.TestCase):
         self.assertTrue(out['result']['is_error']);self.assertEqual(calls,[])
     def test_unexpected_tool_failure_cleanup(self):
         closed=[]
-        result=run_session('检查',lambda:{'builtins':{},'pool':{'definitions':[],'routes':{}},'system':'fixed'},lambda h:{'history':h,'messages':h},lambda _:{'stop_reason':'tool_use','content':[{'type':'tool_use','id':'x','name':'missing','input':{}}]},lambda *_:False,{'after':[lambda _:None]},lambda:closed.append(1),max_calls=1)
-        self.assertEqual(closed,[1]);self.assertEqual(result['outcome']['status'],'call_limit')
+        with patch('runtime.dispatch_call',side_effect=RuntimeError('host dispatch failed')):
+            result=run_session('检查',lambda:{'builtins':{},'pool':{'definitions':[],'routes':{}},'system':'fixed'},lambda h:{'history':h,'messages':h},lambda _:{'stop_reason':'tool_use','content':[{'type':'tool_use','id':'x','name':'missing','input':{}}]},lambda *_:False,{},lambda:closed.append(1),max_calls=1)
+        self.assertEqual(closed,[1]);self.assertEqual(result['outcome']['status'],'host_error');self.assertIsNone(result['outcome']['messages'])
 if __name__=='__main__':unittest.main()
